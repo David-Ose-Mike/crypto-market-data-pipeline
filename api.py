@@ -11,6 +11,7 @@ def get_crypto_data():
             "page": 1
             }
         response = requests.get(url,params=params)
+        response.raise_for_status()
         data = response.json()
         return data
     
