@@ -19,7 +19,12 @@ def get_connection():
         return connection,cursor
     except psycopg2.Error as e:
         logger.error(f"Database connection error: {e}")
+        return None,None
+        
 def insert_bronze_data(data):
+    if not data:
+        logger.warning("No data to insert into bronze, skipping")
+        return
     connection, cursor = None, None
     try:
         connection, cursor = get_connection()
